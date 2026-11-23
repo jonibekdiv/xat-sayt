@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f6f5ff;
+  --card: #ffffff;
+  --fg: #1b1a2e;
+  --muted: #6b6a85;
+  --line: #e4e2f5;
+  --accent: #5b4bff;
+  --accent-2: #b24bff;
+  --ok: #12805c;
+  --err: #c0262d;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #0e0d1a;
+    --card: #181730;
+    --fg: #f0efff;
+    --muted: #9c9bbd;
+    --line: #2b2a4a;
+    --accent: #8274ff;
+    --accent-2: #c77dff;
+    --ok: #4ade9f;
+    --err: #ff7a80;
   }
 }
-
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+}
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(60rem 30rem at 10% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent),
+    radial-gradient(50rem 28rem at 100% 0%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100dvh;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.9rem;
+  padding: 0.85rem 1.4rem;
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: transform 0.15s, opacity 0.15s;
+}
+.btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.field {
+  width: 100%;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.75rem 0.9rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
 }
